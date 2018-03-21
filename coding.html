@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Vouchers</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        @font-face {
+            font-family: 'barcodefont';
+            src: url('./umfiles/assets/barcodefont.ttf') format('truetype');
+        }
+
+        @media print {
+            .noprint {
+                display: none;
+            }
+            .pagebreak {
+                page-break-after: always;
+            }
+        }
+
+        table.styled {
+            margin-top: 0px;
+            margin-bottom: -75px !important;
+            border-collapse: collapse;
+        }
+
+        .styled {
+            float: left;
+        }
+
+        .img-box {
+            width: 75mm;
+        }
+
+        .img-box img {
+            width: 100%;
+        }
+
+        .text-box,
+        .text-barcode {
+            position: relative;
+        }
+
+        .text-box {
+            width: 100%;
+            text-align: center;
+            font-size: 23px;
+            top: -49.5mm;
+            letter-spacing: 1px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .text-box span {
+            font-family: sans-serif;
+        }
+
+        .text-barcode {
+            width: 100%;
+            top: -22.5mm;
+            font-size: 48px;
+            margin-left: 11mm;
+            letter-spacing: 4px;
+            font-family: 'barcodefont';
+        }
+
+        .text-barcode #barcode {}
+    </style>
+</head>
+
+<body>
+
+	<table class="styled">
+		<tbody>
+		    <tr>
+		        <td>
+		            <div class="img-box"> <img src="./umfiles/vch-2500.png"> </div>
+		            <div class="text-box"> <span>%u_username%</span> </div>
+		             <div class="text-barcode">
+		             	<span class="tgl"></span><span class="bulan"></span>-
+		             	<span class="produksi"></span><span class="nomor"></span>
+		             </div>
+		        </td>
+		    </tr>
+	    </tbody>
+	</table>
+<script type="text/javascript">
+	var str_tanggal = '%u_firstName%'; //  %u_firstName%
+	var str_voucher = '%u_lastName%'; // %u_lastName%
+
+    var sub_tgl = str_tanggal.substr(0,2);
+    var sub_bulan = str_tanggal.substr(3,2);
+    var sub_produksi = str_voucher.substr(0,2);
+    var sub_nomor = Number(str_voucher.substr(3,4));
+
+    var tgl = document.getElementsByClassName("tgl");
+    var bulan = document.getElementsByClassName("bulan");
+    var produksi = document.getElementsByClassName("produksi");
+    var nomor = document.getElementsByClassName("nomor");
+
+    for (var i = 0; i <= 1000; i++) {
+    	tgl[i].innerHTML = sub_tgl;
+    	bulan[i].innerHTML = sub_bulan;
+    	produksi[i].innerHTML = sub_produksi;
+    	if(sub_nomor < 10) {
+    		nomor[i].innerHTML = "000"+sub_nomor++;
+    	} else if(sub_nomor < 100) {
+    		nomor[i].innerHTML = "00"+sub_nomor++;
+    	} else if(sub_nomor < 1000) {
+    		nomor[i].innerHTML = "0"+sub_nomor++;
+    	} else {
+    		nomor[i].innerHTML = sub_nomor++;
+    	}
+    }
+</script>
+
+</body>
+</html>
